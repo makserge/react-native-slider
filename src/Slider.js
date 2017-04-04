@@ -382,8 +382,8 @@ var Slider = React.createClass({
 
   _getValue(gestureState: Object) {
     var length = this.state.containerSize.width - this.state.thumbSize.width;
-    var distance = (this.props.vertical === 90 || this.props.vertical === 270)  ? -gestureState.dy : gestureState.dx;
-    var thumbLeft = this.props.vertical === 270 ? this._previousLeft - distance : this._previousLeft + distance;
+    var distance = (this.props.orientation === 90 || this.props.orientation === 270)  ? -gestureState.dy : gestureState.dx;
+    var thumbLeft = this.props.orientation === 270 ? this._previousLeft - distance : this._previousLeft + distance;
 
     var ratio = thumbLeft / length;
 
