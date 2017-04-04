@@ -164,9 +164,10 @@ var Slider = React.createClass({
     animationConfig : PropTypes.object,
 
     /**
-    * Set to true if the slider is placed vertically
+    * Set to 90 if the slider is placed vertically
     */
-    vertical: PropTypes.bool,
+    rotation: PropTypes.number,
+
   },
   getInitialState() {
     return {
@@ -189,7 +190,7 @@ var Slider = React.createClass({
       thumbTouchSize: {width: 40, height: 40},
       debugTouchArea: false,
       animationType: 'timing',
-      vertical: false,
+      rotation: 0,
     };
   },
   componentWillMount() {
@@ -381,9 +382,8 @@ var Slider = React.createClass({
 
   _getValue(gestureState: Object) {
     var length = this.state.containerSize.width - this.state.thumbSize.width;
-    var distance = this.props.vertical ? -gestureState.dy : gestureState.dx;
-
-    var thumbLeft = this._previousLeft + distance;
+    var distance = (this.props.vertical === 90 || this.props.vertical === 270)  ? -gestureState.dy : gestureState.dx;
+    var thumbLeft = this.props.vertical === 270 ? this._previousLeft - distance : this._previousLeft + distance;
 
     var ratio = thumbLeft / length;
 
